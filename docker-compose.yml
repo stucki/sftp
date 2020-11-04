@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  sftp:
+    image: atmoz-sftp
+    build:
+      context: .
+      dockerfile: Dockerfile-alpine
+    ports:
+      - "2222:22"
+    volumes:
+      - ./files/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
+      - ./files/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
+      - ./shared:/home/user/shared
+    command: user:password:1000:1000
